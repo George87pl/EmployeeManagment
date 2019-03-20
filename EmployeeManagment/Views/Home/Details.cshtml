@@ -1,8 +1,24 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@using EmployeeManagment.Models
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
-    <h1>HELLO!</h1>
+    <h3>@ViewData["PageTitle"]</h3>
+
+@{
+    var employee = ViewData["Employe"] as Employee;
+}
+    
+<div>
+    Name: @employee.Name
+</div>
+<div>
+    Name: @employee.Email
+</div>
+<div>
+    Name: @employee.Department
+</div>
+
 </body>
 </html>
