@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using EmployeeManagment.Models;
+﻿using EmployeeManagment.Models;
 using EmployeeManagment.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,11 +23,30 @@ namespace EmployeeManagment.Controllers
         {
             var model = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id??1),
+                Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Title"
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee newEmployee = _employeeRepository.Add(employee);
+
+                return RedirectToAction("Details", new {id = newEmployee.Id});
+            }
+
+            return View();
         }
     }
 }
